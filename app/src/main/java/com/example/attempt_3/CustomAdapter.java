@@ -47,9 +47,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.stock_cost_txt.setText(String.valueOf((stock_cost.get(position))));
         holder.stock_quantity_txt.setText(String.valueOf((stock_quantity.get(position))));
 
-        //For un used ID field
-        // holder.stock_id_txt.setText(String.valueOf((stock_id.get(position))));
-
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,8 +80,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             stock_quantity_txt = itemView.findViewById(R.id.stockQuantityText);
             mainLayout = itemView.findViewById(R.id.mainLayout);
 
-            //For un used ID field
-            //stock_id_txt = itemView.findViewById(R.id.stockIdText);
         }
     }
 }
