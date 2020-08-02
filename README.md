@@ -2,9 +2,9 @@
 
 Future Features
 - News on listed stock
--- focus on dividend news
+  - focus on dividend news
 - import data from Robinhood and m1
-- sync with both
+  - sync with both
 - click to see more details about a certain stock
 - trend data
 - diversity data
@@ -18,8 +18,11 @@ Future Features
 -- maybe access to div score and projections?
 - sign in with Google
 - logos of the stocks
+- App logo
 
 Most important
 - click to see more details about a certain stock
 - certain stocks dividend history
-- ability to remove a stock
+
+### Added
+- ability to add and remove a stock 
