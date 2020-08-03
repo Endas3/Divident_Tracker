@@ -13,6 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
@@ -69,7 +76,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView stock_id_txt, stock_ticker_txt, stock_cost_txt, stock_quantity_txt;
+        TextView stock_ticker_txt, stock_cost_txt, stock_quantity_txt, annualDiv;
         LinearLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -79,7 +86,36 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             stock_cost_txt = itemView.findViewById(R.id.stockCostText);
             stock_quantity_txt = itemView.findViewById(R.id.stockQuantityText);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+            annualDiv = itemView.findViewById(R.id.stockAnnualDiv);
+
+            ApiCall(annualDiv);
 
         }
+    }
+
+    public void ApiCall(final TextView annualDiv){
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.alphavantage.co/").addConverterFactory(GsonConverterFactory.create()).build();
+        StockApi stockApi = retrofit.create(StockApi.class);
+        Call<Post> call = stockApi.getPost();
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()){
+                    annualDiv.setText("Code: " +response.code());
+                    return;
+                }
+                Post post = response.body();
+
+                String content = "";
+                content = "$" + post.getDividendPerShare();
+                annualDiv.setText(content);
+
+            }
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                annualDiv.setText(t.getMessage());
+            }
+        });
+
     }
 }
