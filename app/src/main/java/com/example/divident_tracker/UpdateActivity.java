@@ -1,11 +1,10 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.attempt_3.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UpdateActivity extends AppCompatActivity {

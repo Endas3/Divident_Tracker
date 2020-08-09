@@ -1,4 +1,4 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import java.io.IOException;
 import java.lang.reflect.Array;

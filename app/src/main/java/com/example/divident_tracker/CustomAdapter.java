@@ -1,4 +1,4 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,20 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.attempt_3.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 

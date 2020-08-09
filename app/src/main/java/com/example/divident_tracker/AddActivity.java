@@ -1,4 +1,4 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.attempt_3.R;
 
 public class AddActivity extends AppCompatActivity {
 

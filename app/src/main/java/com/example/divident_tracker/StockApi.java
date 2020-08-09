@@ -1,11 +1,7 @@
-package com.example.attempt_3;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.divident_tracker;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface StockApi {

@@ -1,7 +1,6 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.attempt_3.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId() == R.id.action_news){
             Intent intent = new Intent(MainActivity.this,NewsActivity.class);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.action_data){
+            Intent intent = new Intent(MainActivity.this,DataActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

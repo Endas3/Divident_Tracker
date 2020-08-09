@@ -1,8 +1,10 @@
-package com.example.attempt_3;
+package com.example.divident_tracker;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.attempt_3.R;
 
 public class NewsActivity extends AppCompatActivity {
 

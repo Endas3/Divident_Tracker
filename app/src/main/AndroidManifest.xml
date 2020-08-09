@@ -10,20 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".UpdateActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.example.divident_tracker.UpdateActivity"
+            android:parentActivityName="com.example.divident_tracker.MainActivity" />
         <activity
-            android:name=".AddActivity"
+            android:name="com.example.divident_tracker.AddActivity"
             android:label="Add Stock"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.example.divident_tracker.MainActivity" />
         <activity
-            android:name=".NewsActivity"
+            android:name="com.example.divident_tracker.NewsActivity"
             android:label="News"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.example.divident_tracker.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.divident_tracker.DataActivity"
+            android:label="Portfolio Data"
+            android:parentActivityName="com.example.divident_tracker.MainActivity" />
+        <activity
+            android:name="com.example.divident_tracker.MainActivity"
             android:label="Dividend Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
