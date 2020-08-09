@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +27,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private Context context;
     Activity activity;
-    private ArrayList stock_id, stock_ticker, stock_cost, stock_quantity;
+    private ArrayList stock_id, stock_ticker, stock_cost, stock_quantity, test;
+    GetData getData;
+    Double quant = 0.0;
+    TextView annualDiv;
 
     int position;
+    int i = 0;
 
     CustomAdapter(Activity activity, Context context, ArrayList stock_id, ArrayList stock_ticker, ArrayList stock_cost, ArrayList stock_quantity){
         this.activity = activity;
@@ -46,27 +52,38 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = inflater.inflate(R.layout.my_row, parent, false);
         return new MyViewHolder(view);
     }
-
+    //Set Data for each row
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         this.position = position;
-        holder.stock_ticker_txt.setText(String.valueOf((stock_ticker.get(position))));
-        holder.stock_cost_txt.setText(String.valueOf((stock_cost.get(position))));
-        holder.stock_quantity_txt.setText(String.valueOf((stock_quantity.get(position))));
+
+//        getData = new GetData(stock_ticker);
+//        test.add(getData);
+
+        getData= new GetData();
+        test = getData.ApiCall(stock_ticker, getItemCount());
+
+
+        holder.stock_ticker_txt.setText(String.valueOf(stock_ticker.get(position)));
+        holder.stock_cost_txt.setText(String.valueOf(stock_cost.get(position)));
+        holder.stock_quantity_txt.setText(String.valueOf(stock_quantity.get(position)));
+        holder.stock_div_txt.setText(String.valueOf(test.get(position)));
+
+
+
+
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,UpdateActivity.class);
-                intent.putExtra("id",String.valueOf((stock_id.get(position))));
-                intent.putExtra("ticker",String.valueOf((stock_ticker.get(position))));
-                intent.putExtra("cost",String.valueOf((stock_cost.get(position))));
-                intent.putExtra("quantity",String.valueOf((stock_quantity.get(position))));
+                intent.putExtra("id",String.valueOf(stock_id.get(position)));
+                intent.putExtra("ticker",String.valueOf(stock_ticker.get(position)));
+                intent.putExtra("cost",String.valueOf(stock_cost.get(position)));
+                intent.putExtra("quantity",String.valueOf(stock_quantity.get(position)));
                 activity.startActivityForResult(intent,1);
-
             }
         });
-
     }
 
     @Override
@@ -76,7 +93,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView stock_ticker_txt, stock_cost_txt, stock_quantity_txt, annualDiv;
+        TextView stock_ticker_txt, stock_cost_txt, stock_quantity_txt, stock_div_txt;
         LinearLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -86,36 +103,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             stock_cost_txt = itemView.findViewById(R.id.stockCostText);
             stock_quantity_txt = itemView.findViewById(R.id.stockQuantityText);
             mainLayout = itemView.findViewById(R.id.mainLayout);
-            annualDiv = itemView.findViewById(R.id.stockAnnualDiv);
+            stock_div_txt = itemView.findViewById(R.id.stockAnnualDiv);
 
-            ApiCall(annualDiv);
+            //ApiCall(annualDiv);
 
         }
     }
 
-    public void ApiCall(final TextView annualDiv){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.alphavantage.co/").addConverterFactory(GsonConverterFactory.create()).build();
-        StockApi stockApi = retrofit.create(StockApi.class);
-        Call<Post> call = stockApi.getPost();
-        call.enqueue(new Callback<Post>() {
-            @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
-                if (!response.isSuccessful()){
-                    annualDiv.setText("Code: " +response.code());
-                    return;
-                }
-                Post post = response.body();
 
-                String content = "";
-                content = "$" + post.getDividendPerShare();
-                annualDiv.setText(content);
-
-            }
-            @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                annualDiv.setText(t.getMessage());
-            }
-        });
-
-    }
 }

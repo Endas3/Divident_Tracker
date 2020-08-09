@@ -5,11 +5,14 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface StockApi {
-    String stock_ticker = "IBM";
-//search how to modify get call with arraylist data
-    @GET("query?function=OVERVIEW&symbol=" + stock_ticker + "&apikey=demo")
-        //PSPJXD6H5JCCNM9J")
-    Call<Post> getPost();
+    @GET("/query")
+    Call<Post> getPost(
+//            @Query("apikey") String apiKey,
+            @Query("function") String function,
+            @Query("symbol") String symbol,//);
+            @Query("apikey") String apiKey);
 }
