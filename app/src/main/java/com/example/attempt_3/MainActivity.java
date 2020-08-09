@@ -1,6 +1,7 @@
 package com.example.attempt_3;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
+
         customAdapter = new CustomAdapter(MainActivity.this, this, stock_id, stock_ticker, stock_cost, stock_quantity);
         recyclerView.setAdapter(customAdapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -74,7 +79,20 @@ public class MainActivity extends AppCompatActivity {
                 stock_quantity.add(cursor.getString(3));
             }
         }
+    }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigate, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.action_news){
+            Intent intent = new Intent(MainActivity.this,NewsActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

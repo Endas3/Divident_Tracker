@@ -7,6 +7,8 @@
     tools:context=".AddActivity"
     android:padding="30dp">
 
+
+
     <EditText
         android:id="@+id/tickerInput"
         android:layout_width="wrap_content"
