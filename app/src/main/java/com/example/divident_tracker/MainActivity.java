@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.attempt_3.R;
@@ -22,11 +23,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton addButton;
-
     MyDBHelper myDB;
     ArrayList<String> stock_id, stock_ticker, stock_cost, stock_quantity;
     CustomAdapter customAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +50,13 @@ public class MainActivity extends AppCompatActivity {
 
         storeDataInArrays();
 
-
         customAdapter = new CustomAdapter(MainActivity.this, this, stock_id, stock_ticker, stock_cost, stock_quantity);
         recyclerView.setAdapter(customAdapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
             recreate();
@@ -87,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.navigate, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId() == R.id.action_news){

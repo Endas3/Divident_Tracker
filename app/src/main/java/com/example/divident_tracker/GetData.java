@@ -74,7 +74,8 @@ public class GetData {
             final int random2 = new Random().nextInt(5);
             if(stock_div.size() == 0) {
                 for (int i = 0; i < num; i++) { //used for testing
-                    stock_div.add(i, "$"+ String.valueOf(random) + ".0" + String.valueOf(random2));
+                   // stock_div.add(i, "$"+ String.valueOf(random) + ".0" + String.valueOf(random2));
+                    stock_div.add(i, "$3.02");
                 }
             }
         return stock_div;
