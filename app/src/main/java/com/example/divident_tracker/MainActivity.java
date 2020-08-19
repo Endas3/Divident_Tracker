@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton addButton;
     MyDBHelper myDB;
-    ArrayList<String> stock_id, stock_ticker, stock_cost, stock_quantity;
+    ArrayList<String> stock_id, stock_ticker, stock_cost, stock_quantity , stock_div;
     CustomAdapter customAdapter;
+    GetData getData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,11 @@ public class MainActivity extends AppCompatActivity {
         stock_ticker = new ArrayList<>();
         stock_cost = new ArrayList<>();
         stock_quantity = new ArrayList<>();
+        stock_div = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(MainActivity.this, this, stock_id, stock_ticker, stock_cost, stock_quantity);
+        customAdapter = new CustomAdapter(MainActivity.this, this, stock_id, stock_ticker, stock_cost, stock_quantity, stock_div);
         recyclerView.setAdapter(customAdapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataInArrays(){
         Cursor cursor =myDB.readAllData();
+        getData= new GetData();
+
         if(cursor.getCount() == 0){
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }else{
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 stock_ticker.add(cursor.getString(1));
                 stock_cost.add(cursor.getString(2));
                 stock_quantity.add(cursor.getString(3));
+                stock_div.add(getData.ApiCall(cursor.getString(1)));
             }
         }
     }

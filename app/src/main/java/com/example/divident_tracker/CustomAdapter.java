@@ -24,14 +24,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private Context context;
     Activity activity;
-    private ArrayList stock_id, stock_ticker, stock_cost, stock_quantity, test;
+    private ArrayList stock_id, stock_ticker, stock_cost, stock_quantity, stock_div;
     GetData getData;
-    Double quant = 0.0;
-    TextView annualDiv;
-
 
     int position;
-    int i = 0;
 
     private boolean expanded;
 
@@ -43,13 +39,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.expanded = expanded;
     }
 
-    CustomAdapter(Activity activity, Context context, ArrayList stock_id, ArrayList stock_ticker, ArrayList stock_cost, ArrayList stock_quantity){
+    CustomAdapter(Activity activity, Context context, ArrayList stock_id, ArrayList stock_ticker, ArrayList stock_cost, ArrayList stock_quantity, ArrayList stock_div){
         this.activity = activity;
         this.context = context;
         this.stock_id = stock_id;
         this.stock_ticker = stock_ticker;
         this.stock_cost = stock_cost;
         this.stock_quantity = stock_quantity;
+        this.stock_div = stock_div;
         this.expanded=false;
 
 
@@ -69,17 +66,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.position = position;
 
 
-//        getData = new GetData(stock_ticker);
-//        test.add(getData);
-        getData= new GetData();
-        test = getData.ApiCall(stock_ticker, getItemCount());
+
 
         holder.expandableLayout.setVisibility(this.expanded ? View.VISIBLE : View.GONE);
 
         holder.stock_ticker_txt.setText(String.valueOf(stock_ticker.get(position)));
         holder.stock_cost_txt.setText(String.valueOf(stock_cost.get(position)));
         holder.stock_quantity_txt.setText(String.valueOf(stock_quantity.get(position)));
-        holder.stock_div_txt.setText(String.valueOf(test.get(position)));
+        holder.stock_div_txt.setText(String.valueOf(stock_div.get(position)));
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
